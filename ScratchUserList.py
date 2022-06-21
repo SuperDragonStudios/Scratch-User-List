@@ -1,3 +1,4 @@
+#This is meant to run on the computer itself, hence the text file instead of a Replit db
 import os
 os.system("pip install scratchattach")
 os.system("pip install requests")
