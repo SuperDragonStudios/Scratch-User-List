@@ -21,8 +21,6 @@ def addUser(argument1, argument2):
     status = "This person was already added."
   elif argument1.lower() == argument2.lower():
     status = "You cannot add yourself."
-  elif response.status_code != 200:
-    status = "This user does not exist."
   else:
     response = requests.get(f"htttps://api.scratch.mit.edu/users/{argument2}")
     if response.status_code == 200:
