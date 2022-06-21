@@ -1,11 +1,10 @@
-#This is meant to run on the computer itself, hence the text file instead of a Replit db
 import os
 os.system("pip install scratchattach")
 os.system("pip install requests")
 import scratchattach as scratch3
 import requests
 
-session = scratch3.login("DragonServer1", password)
+session = scratch3.login("DragonServer1", "amongsus1123")
 conn = session.connect_cloud(project_id="706569784")
 
 client = scratch3.CloudRequests(conn)
@@ -16,7 +15,6 @@ def addUser(argument1, argument2):
   print(f"{argument1} is adding {argument2}")
   file = open("ScratchUserList.txt", "r")
   text = file.read()
-  response = requests.get(f"https://api.scratch.mit.edu/users/{argument2}")
   if "key"+argument1.lower() in text.lower():
     status = "You already added someone."
   elif argument2.lower() in text.lower():
@@ -26,15 +24,19 @@ def addUser(argument1, argument2):
   elif response.status_code != 200:
     status = "This user does not exist."
   else:
-    status = "User added!"
-    file.close()
-    file = open("ScratchUserList.txt", "a+")
-    if len(text) > 0:
-      file.write("\n")
-    file.write("key"+argument1+":"+argument2)
-    file.close()
-    user = session.connect_user(argument2)
-    user.post_comment(f"Hello @{argument2}! You have been added to SuperDragonStudios's Scratch User List (https://scratch.mit.edu/projects/706569784/) by @{argument1}.")
+    response = requests.get(f"htttps://api.scratch.mit.edu/users/{argument2}")
+    if response.status_code == 200:
+      status = "User added!"
+      file.close()
+      file = open("ScratchUserList.txt", "a+")
+      if len(text) > 0:
+        file.write("\n")
+      file.write("key"+argument1+":"+argument2)
+      file.close()
+      user = session.connect_user(argument2)
+      user.post_comment(f"Hello @{argument2}! You have been added to SuperDragonStudios's Scratch User List (https://scratch.mit.edu/projects/706569784/) by @{argument1}.")
+    else:
+      status = "This user does not exist."
   print(status)
   return status
 
