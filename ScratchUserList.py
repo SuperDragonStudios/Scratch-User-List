@@ -4,7 +4,7 @@ os.system("pip install requests")
 import scratchattach as scratch3
 import requests
 
-session = scratch3.login("DragonServer1", password) #Placeholder password
+session = scratch3.login("DragonServer1", password)
 conn = session.connect_cloud(project_id="706569784")
 
 client = scratch3.CloudRequests(conn)
